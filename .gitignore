@@ -1,1 +1,3 @@
 makeenv
+*.pyc
+__pycache__
