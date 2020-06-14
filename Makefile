@@ -2,7 +2,7 @@
 IGNORE := $(shell bash -c "source setup.sh; env | sed 's/=/:=/' | sed 's/^/export /' > makeenv")                         
 include makeenv 
 
-APP_NAME := heroku
+DB_NAME := postgres
 
 
 # run: DATABASE_URL=postgres://postgres:postgres@localhost:5432/postgres
@@ -13,7 +13,7 @@ setup:
 	source setup.sh
 
 reset-db:
-	dropdb $(APP_NAME) && createdb $(APP_NAME)
+	dropdb $(DB_NAME) && createdb $(DB_NAME)
 	flask db upgrade
 
 start-db-server:
@@ -23,4 +23,4 @@ stop-db-server:
 	pg_ctl -D /usr/local/var/postgres stop
 
 connect-to-db:
-	psql $(APP_NAME)
+	psql $(DB_NAME)
